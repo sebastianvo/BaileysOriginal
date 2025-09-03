@@ -29,6 +29,13 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
 
 # Instalar dependencias npm
 Write-Host "Instalando dependencias npm..."
-npm install
+# Cambiar al directorio del repositorio (padre de este script)
+$repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
+Push-Location $repoRoot
+try {
+    npm install
+} finally {
+    Pop-Location
+}
 
 Write-Host "Instalación completada"
