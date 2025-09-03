@@ -30,7 +30,15 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
 # Instalar dependencias npm
 Write-Host "Instalando dependencias npm..."
 # Cambiar al directorio del repositorio (padre de este script)
-$repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
+$scriptDir = $PSScriptRoot
+if (-not $scriptDir) {
+    $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+}
+if (-not $scriptDir) {
+    Write-Error "No se pudo determinar la ruta del script. Ejecútelo como archivo, por ejemplo: .\\Example\\install-windows-server.ps1"
+    exit 1
+}
+$repoRoot = Resolve-Path (Join-Path $scriptDir '..')
 Push-Location $repoRoot
 try {
     npm install

@@ -383,6 +383,9 @@ It protects requests with an API key and can be set up and started on Windows vi
 ./Example/start-windows-server.ps1
 ```
 
+> [!NOTE]
+> Execute the script file as shown above. Pasting its contents into the console won't detect the repository path and `npm install` will fail.
+
 Every HTTP request must include the header `x-api-key` with the same key defined in the script.
 Example usage from C# (ASP.NET WebForms):
 
