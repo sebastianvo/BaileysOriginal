@@ -370,6 +370,33 @@ connectToWhatsApp()
 > [!IMPORTANT]
 > In `messages.upsert` it's recommended to use a loop like `for (const message of event.messages)` to handle all messages in array
 
+### Windows HTTP Server Example
+
+The `Example/windows-server.ts` file shows how to expose a minimal HTTP API powered by Baileys.
+It protects requests with an API key and can be set up and started on Windows via PowerShell:
+
+```powershell
+# run once to install prerequisites and dependencies
+./Example/install-windows-server.ps1
+
+# start the server
+./Example/start-windows-server.ps1
+```
+
+> [!NOTE]
+> Execute the script file as shown above. Pasting its contents into the console won't detect the repository path and `npm install` will fail.
+
+Every HTTP request must include the header `x-api-key` with the same key defined in the script.
+Example usage from C# (ASP.NET WebForms):
+
+```csharp
+var client = new HttpClient();
+client.DefaultRequestHeaders.Add("x-api-key", ApiKey);
+var payload = new { jid = "123456789@s.whatsapp.net", message = "Hola" };
+var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+await client.PostAsync("http://localhost:3000/send-message", content);
+```
+
 ### Decrypt Poll Votes
 
 - By default poll votes are encrypted and handled in `messages.update`
