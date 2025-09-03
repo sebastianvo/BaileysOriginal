@@ -373,11 +373,13 @@ connectToWhatsApp()
 ### Windows HTTP Server Example
 
 The `Example/windows-server.ts` file shows how to expose a minimal HTTP API powered by Baileys.
-It protects requests with an API key and can be started on Windows via PowerShell:
+It protects requests with an API key and can be set up and started on Windows via PowerShell:
 
 ```powershell
-# install dependencies once
-npm install
+# run once to install prerequisites and dependencies
+./Example/install-windows-server.ps1
+
+# start the server
 ./Example/start-windows-server.ps1
 ```
 
